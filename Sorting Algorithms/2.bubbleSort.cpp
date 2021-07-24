@@ -12,42 +12,38 @@ Bubble Sort	Best -> Ω(n) Average -> θ(n^2)	Worst -> O(n^2)
 
 using namespace std;
 
-int main()
-{
-    int size;
-    cin >> size;
-    int unsortedArray[size];
+void swap(int arr[], int firstIndex, int secondIndex){
+    int temp = arr[firstIndex];
+    arr[firstIndex] = arr[secondIndex];
+    arr[secondIndex] = temp;
+    return;
+}
 
-    for (int x = 0; x < size; x++)
-    {
-        cin >> unsortedArray[x];
+
+void bubbleSort(int arr[],int size){
+    
+    if(size<=1){
+        return;
     }
-
-    for (int x = 0; x < (size - 1); x++)
-    {
-        int swap = false;
-        for (int y = 0; y < (size - 1); y++)
-        {
-            if (unsortedArray[y] > unsortedArray[y + 1])
-            {
-                int LowestElement = unsortedArray[y + 1];
-                unsortedArray[y + 1] = unsortedArray[y];
-                unsortedArray[y] = LowestElement;
-                swap = true;
-            }
-            else
-            {
-                continue;
+    for(int i = (size-1); i>0; i--){
+        for(int j = 0; j<i;j++){
+            if(arr[j]>arr[j+1]){
+                swap(arr,j,j+1);
             }
         }
-        if (swap == false)
-            break;
     }
+    
+}
 
-    for (int x = 0; x < size; x++)
-    {
-        cout << unsortedArray[x] << " ";
-    }
-
-    return 0;
+int main()
+{
+   int arr[] = {23,56,23,45,23,54,7,34,2,1,34,6,657,34,23,2,345,546,56,34};
+   int size = sizeof(arr)/sizeof(arr[0]);
+   
+   bubbleSort(arr,size);
+   
+   
+   for(int i = 0; i<size; i++){
+       cout<< arr[i] << " ";
+   }
 }
