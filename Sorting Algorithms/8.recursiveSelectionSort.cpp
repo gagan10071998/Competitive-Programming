@@ -2,43 +2,45 @@
 
 using namespace std;
 
-void swap(int arr[], int indexOne, int indexTwo){
-           int temp = arr[indexOne];
-           arr[indexOne] = arr[indexTwo];
-           arr[indexTwo] = temp;
-           return ;
+void swap(int arr[], int firstIndex, int secondIndex){
+    int temp = arr[firstIndex];
+    arr[firstIndex] = arr[secondIndex];
+    arr[secondIndex] = temp;
+    return;
 }
 
-void selectionSort(int arr[], int size, int startIndex, int iterator){
-   
-   if(startIndex == (size-2)){
-       if(arr[iterator]<arr[startIndex]){
-           swap(arr,iterator,startIndex);
-           return ;
-       }
-       return;
-   }
-   
-   selectionSort(arr, size, startIndex+1,iterator+1);
-   
-   for(;iterator<size;iterator++){
-       if(arr[iterator]<arr[startIndex]){
-           swap(arr,iterator,startIndex);
-          startIndex++;
-       }
-   }
-   
-   return;
-}
 
+void selectionSort(int arr[],int size, int index){
+    if(size<=1 || index==(size-1)){
+        return;
+    }
+    
+    int smallestElementIndex = index;
+    for(int j = index+1; j<size; j++){
+        if(arr[j]<arr[smallestElementIndex]){
+            smallestElementIndex = j;
+        }
+    }
+    if(smallestElementIndex!=index){
+            swap(arr,smallestElementIndex, index);   
+    }
+    
+    selectionSort(arr,size,index+1);
+    
+    return;
+    
+   
+}
 
 int main()
 {
-    int a[] = {10,2,11,3,5,7,54,123,23,9,24,45};
-    int size = sizeof(a)/sizeof(a[0]);
-    selectionSort(a,size,0,1);
-    for(int i = 0; i < size; i++){
-        cout << a[i] << " ";
-    }
-    return 0;
+   int arr[] = {23,56,23,45,23,54,7,34,2,1,34,6,657,34,23,2,345,546,56,34};
+   int size = sizeof(arr)/sizeof(arr[0]);
+   
+   selectionSort(arr,size, 0);
+   
+   
+   for(int i = 0; i<size; i++){
+       cout<< arr[i] << " ";
+   }
 }
