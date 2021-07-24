@@ -13,42 +13,42 @@ Selection Sort	Best -> Ω(n^2)	Average -> θ(n^2)	Worst -> O(n^2)
 
 using namespace std;
 
-void swap(int arr[], int indexOne, int indexTwo){
-           int temp = arr[indexOne];
-           arr[indexOne] = arr[indexTwo];
-           arr[indexTwo] = temp;
-           return ;
+void swap(int arr[], int firstIndex, int secondIndex){
+    int temp = arr[firstIndex];
+    arr[firstIndex] = arr[secondIndex];
+    arr[secondIndex] = temp;
+    return;
 }
 
+
 void selectionSort(int arr[],int size){
-   if(size <= 1){
-       return;
-   }
-   else if(size==2){
-       if(arr[1]<arr[0]){
-           swap(arr,1,0);
-           return ;
-       }
-       return;
-   }
-   for(int startIndex = 0; startIndex<(size-1); startIndex++){
-       for(int iterator = (startIndex+1);iterator<size;iterator++){
-           if(arr[iterator] < arr[startIndex]){
-                swap(arr,iterator,startIndex);
+    if(size<=1){
+        return;
+    }
+    for(int i = 0; i<(size-1); i++){
+       int smallestElementIndex = i;
+       for(int j = i+1; j<size; j++){
+           if(arr[j]<arr[smallestElementIndex]){
+               smallestElementIndex = j;
            }
+       }
+       if(smallestElementIndex!=i){
+            swap(arr,smallestElementIndex, i);   
        }
    }
    return;
+   
 }
-
 
 int main()
 {
-    int a[] = {10,2,11,3,5,7,54,123,23,9,24,45};
-    int size = sizeof(a)/sizeof(a[0]);
-    selectionSort(a,size);
-    for(int i = 0; i < size; i++){
-        cout << a[i] << " ";
-    }
-    return 0;
+   int arr[] = {23,56,23,45,23,54,7,34,2,1,34,6,657,34,23,2,345,546,56,34};
+   int size = sizeof(arr)/sizeof(arr[0]);
+   
+   selectionSort(arr,size);
+   
+   
+   for(int i = 0; i<size; i++){
+       cout<< arr[i] << " ";
+   }
 }
